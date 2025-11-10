@@ -4,9 +4,9 @@
   "display": "standalone",
   "name": "timesince",
   "orientation": "any",
-  "scope": "/",
+  "scope": "/timesince",
   "short_name": "timesince",
-  "start_url": "/",
+  "start_url": "/timesince",
   "theme_color": "#ffffff",
   "lang": "en",
   "icons": [
