@@ -8,23 +8,38 @@ function update() {
     var today = Temporal.Now.plainDateISO();
     var url = new URL(location);
 
-    // if the datepicker's got a value, use that
-    if (datepicker.value) {
-        url.searchParams.set('date', datepicker.value);
-    } else { // otherwise, use the query string/today's date
-        if (!url.searchParams.has('date')) {
-            url.searchParams.set('date', today.toString());
-        }
-        datepicker.value = url.searchParams.get('date');
+    // we look for the date in the following order:
+    // 1. the date picker
+    // 2. the query string
+    // 3. localstorage
+    // 4. today's date
+    var date = datepicker.value || url.searchParams.get('date') || localStorage.getItem('date') || today.toString();
+
+    // update all the values
+    setIfDiff(datepicker, 'value', date);
+    url.searchParams.set('date', date);
+    localStorage.setItem('date', date);
+
+    // now we can finish up the date selector
+    if (datepicker.disabled) {
+        datepicker.max = today.toString();
+        datepicker.disabled = false;
     }
-    datepicker.max = today.toString();
-    datepicker.disabled = false;
+
+    // for the title, we only check the query string and localstorage
+    var title = url.searchParams.get('title') || localStorage.getItem('title');
+    if (title) {
+        url.searchParams.set('title', title);
+        localStorage.setItem('title', title);
+    } else {
+        title = `time since ${date}`;
+    }
 
     if (url.href != location.href) {
         history.replaceState('', '', url.href);
     }
 
-    var start = Temporal.PlainDate.from(url.searchParams.get('date'));
+    var start = Temporal.PlainDate.from(date);
     var duration = today.since(start).round({largestUnit: 'year', relativeTo: start});
 
     var title = `time since ${start.toString()}`;
