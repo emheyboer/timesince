@@ -1,0 +1,28 @@
+html {
+    font-family: Verdana, sans-serif;
+    text-align: center;
+    touch-action: manipulation;
+}
+
+* {
+    box-sizing: border-box;
+    background-color: #f5eddd;
+}
+
+html,body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+div {
+    flex: 1;
+    font-size: 3vh;
+    text-align: center;
+}
+
+#timestring {
+    font-size: 10vmin;
+}
