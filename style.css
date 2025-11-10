@@ -23,6 +23,10 @@ div {
     text-align: center;
 }
 
+#datepicker {
+    font-size: 3vh;
+}
+
 #timestring {
     font-size: 10vmin;
 }
