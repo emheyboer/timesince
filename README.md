@@ -1,0 +1,1 @@
+A webpage and PWA for counting the time that's passed since a specified date. The search parameters `date=` and `title=` specify the date and page title respectively.
