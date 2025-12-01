@@ -30,3 +30,9 @@ div {
 #timestring {
     font-size: 10vmin;
 }
+
+@media (prefers-color-scheme: dark) {
+    html {
+        filter: invert(.90);
+    }
+}
